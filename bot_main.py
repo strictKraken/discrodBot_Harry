@@ -2,12 +2,13 @@ import discord
 import config
 import random
 import time
-# import logging
+import logging
 from discord.ext import commands
 
 # Для рандома
 random.seed(time.time())
-bot = commands.Bot(command_prefix='соси ', intents=discord.Intents.all())
+logging.basicConfig(level=logging.INFO)
+bot = commands.Bot(command_prefix=config.CONFIG_PREFIX, intents=discord.Intents.all())
 
 
 @bot.command(pas_context=True)
@@ -37,6 +38,21 @@ async def bibu(message):
         #    memids.append(member.id)
         # print(memids)
     #    await message.channel.send('booms')
+
+
+@bot.command(pas_context=True)
+async def roll(ctx):
+    rolling = random.randrange(100)
+    if rolling % 2 == 0:
+        await ctx.send('Решка')
+    else: await ctx.send('Орёл')
+
+@bot.command(pas_context=True)
+async def rand():
+    pass
+
+
+
 
 
 @bot.event
