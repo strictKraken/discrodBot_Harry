@@ -28,7 +28,25 @@ class trash_bot(commands.Cog):
     async def rend(self, ctx, number):
         await ctx.send(random.randrange(0, int(number)))
 
+    @commands.command()
+    async def boom(self, ctx):
+        if ctx.channel.id == config.CHANNEL_ID:
+            print('Start move people')
+            voice_channel_id = config.VOICE_CHANNEL_ID.values()
+            #list of voice channels for active
+            voice_channels = []
+            for channel in voice_channel_id:
+                voice_channels.append(self.bot.get_channel(channel))
+            print(voice_channels)
 
+            # Get all members in chat
+            for channel in voice_channels:
+                # Search members
+                tmp_channel_mem = channel.members
+                print(tmp_channel_mem)
+                # Show id
+                for membr in tmp_channel_mem:
+                    await membr.move_to(voice_channels[random.randrange(len(voice_channels))])
 #
 intents = discord.Intents.default()
 intents.members = True
